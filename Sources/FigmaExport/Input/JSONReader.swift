@@ -16,7 +16,7 @@ final class JSONReader {
     }
 
     func read() throws -> Any {
-        let data = try Data(contentsOf: URL(fileURLWithPath: inputPath))
+        let data = try Data(contentsOf: URL(string: inputPath) ?? URL(fileURLWithPath: inputPath))
         return try JSONSerialization.jsonObject(with: data, options: [])
     }
 }
