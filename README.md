@@ -527,6 +527,40 @@ Example:
 
 See [CONFIG.md](CONFIG.md) for more information in the `variablesColors` section.
 
+**Figma Variables**
+
+Figma is moving away from styles towards variables. This allows designers to create a color variable e.g. `BackgroundDefault` and have various states of it e.g. `light` and `dark`. The API for this is still in beta and is for enterprise customers only. In the interm, you can use a Figma plugin [Variables to JSON](https://www.figma.com/community/plugin/1301567053264748331/variables-to-json) to download the variables as JSON and specify them in the config. Each variable should have a "light" state, but can also include "dark", "lightHC", "darkHC" too.
+
+If you want to provide the JSON yourself, the variables should be in the following format. It supports reading from hex and rgba along with traversing through the folder structures. 
+
+```
+{
+    "app-tokens": {
+        "light": {
+            "background-default": {
+                "value": "rgba(255, 255, 255, 1)"
+            },
+            "background-secondary": {
+                "value": "#e7134b"
+            }
+        },
+        "dark": {
+            "background-default": {
+                "value": "rgba(255, 255, 255, 1)"
+            },
+            "background-secondary": {
+                "value": "#e7134b"
+            }
+        }
+    }
+}
+```
+
+To use this should specify the following properties in the colors common config
+`useVariablesFromFileInstead: true`
+`variableFilePath: 'path-to-styles.json'`
+`variableGroupName: 'app-tokens-or-token-group-name'`
+
 ### For icons
 
 For `figma-export icons`

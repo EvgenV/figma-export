@@ -40,7 +40,20 @@ extension FigmaExportCommand {
             var nameValidateRegexp: String?
             var nameReplaceRegexp: String?
 
-            if let colorParams = commonParams?.colors {
+            if commonParams?.colors?.useVariablesFromFileInstead ?? false {
+                let colorParams = commonParams?.colors
+                guard
+                    let fileName = colorParams?.variableFilePath,
+                    let groupName = colorParams?.variableGroupName
+                else {
+                    throw FigmaExportError.componentsNotFound
+                }
+
+                let dataReader = JSONReader(inputPath: fileName)
+                let styles = try dataReader.read()
+                colors = try JSONColorsLoader.processColors(in: styles, groupName: groupName)
+
+            } else if let colorParams = commonParams?.colors {
                 let loader = ColorsLoader(
                     client: client,
                     figmaParams: figmaParams,

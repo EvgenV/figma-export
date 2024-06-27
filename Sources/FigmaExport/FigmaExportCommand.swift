@@ -6,6 +6,7 @@ enum FigmaExportError: LocalizedError {
     
     case invalidFileName(String)
     case stylesNotFound
+    case stylesNotFoundLocally
     case componentsNotFound
     case accessTokenNotFound
     case colorsAssetsFolderNotSpecified
@@ -17,6 +18,8 @@ enum FigmaExportError: LocalizedError {
             return "File name is invalid: \(name)"
         case .stylesNotFound:
             return "Color/Text styles not found in the Figma file. Have you published Styles to the Library?"
+        case .stylesNotFoundLocally:
+            return "Color styles not found locally. Did you specify the correct path, or have the correct file structure?"
         case .componentsNotFound:
             return "Components not found in the Figma file. Have you published Components to the Library?"
         case .accessTokenNotFound:

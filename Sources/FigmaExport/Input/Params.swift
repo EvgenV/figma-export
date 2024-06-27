@@ -22,6 +22,10 @@ struct Params: Decodable {
             let darkModeSuffix: String?
             let lightHCModeSuffix: String?
             let darkHCModeSuffix: String?
+
+            let useVariablesFromFileInstead: Bool?
+            let variableFilePath: String?
+            let variableGroupName: String?
         }
 
         struct VariablesColors: Decodable {
